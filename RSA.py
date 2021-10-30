@@ -20,12 +20,6 @@ def computeGCD(x, y):
               
     return gcd
 
-def modInverse(a, m):
-     
-    for x in range(1, m):
-        if (((a%m) * (x%m)) % m == 1):
-            return x
-    return -1
 
 
 
@@ -36,7 +30,7 @@ def bangkitKunci(num1,num2,e):
     n = num1 * num2
     nfaiz = (num1-1) * (num2-1)
     if(computeGCD(e,nfaiz)==1):
-        d = modInverse(e,nfaiz)
+        d = ModulUmum.modInverse(e,nfaiz)
         if(d != -1):
             publik.append(e)
             publik.append(n)
