@@ -51,10 +51,7 @@ def encriptRSA(Text,Key):
     for x in Text:
         if(ModulUmum.convert_alfabet(x) != None):
             temp.append(ModulUmum.convert_alfabet(x))
-    if(len(str(Key[1]))%2 == 0):
-        N = len(str(Key[1]))/2 
-    else:
-        N = len(str(Key[1]))/2 + 1
+    N = len(str(Key[1]))/2 
     for i in range(len(temp)):
         count += 1
         if(count < N):
@@ -77,13 +74,26 @@ def encriptRSA(Text,Key):
 def dekirpRSA (Chiper,Key):
     temp = []
     temp2 = []
+    temp3 = []
+    N = len(str(Key[1]))
+    count = 0
+    C = ''
     for x in Chiper:
+        count += 1
+        if(count < N):
+            C += x        
+        elif(count == N):
+            C += x
+            temp3.append(C)
+            count = 0
+            C = ''
+
+    for x in temp3:
         
         if(len(str(pow(int(x),Key[0])%Key[1])) < len(str(Key[1]))):
             temp.append('0'+str(pow(int(x),Key[0])%Key[1]))
         else:
             temp.append(str(pow(int(x),Key[0])%Key[1]))
-    
     count = 0
     C = ''
     for x in temp:
@@ -101,13 +111,3 @@ def dekirpRSA (Chiper,Key):
         temp.append(ModulUmum.convert_Back(x))
     return temp
     
-
-num1 = int(input("masukan nilai P:"))
-num2 = int(input("masukan nilai q:"))
-e = int(input("masukan nilai e:"))
-Text = input("masukan Text:")
-publik, privat = bangkitKunci(num1,num2,e)
-chiper = encriptRSA(Text,publik)
-print("ini chiper text nya:",chiper)
-decrip = dekirpRSA(chiper,privat)
-print("ini plain text nya:", decrip)

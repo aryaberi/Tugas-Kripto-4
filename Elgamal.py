@@ -14,7 +14,7 @@ def enkripsi(teks,k,publick):
     for x in teks:
         m += ModulUmum.convert_alfabet(x)
     print(m) 
-    a = pow(g,k)%publick[2]
+    a = pow(publick[1],k)%publick[2]
     b = pow(publick[0],k)*int(m)%publick[2]
     chiper = [a,b]
     return chiper
@@ -24,6 +24,8 @@ def decripsi(chiper,privat):
     temp = []
     char = '' 
     Counter = 0
+    print(chiper)
+    print(privat)
     a = pow(chiper[0],privat[1]-1-privat[0])%privat[1]
     m = (chiper[1]*a)%privat[1]
     m = str(m)
@@ -47,15 +49,15 @@ def decripsi(chiper,privat):
 
 
 
-p = int(input("Masukan nilai p:"))
-g = int(input("Masukan nilai g:"))
-x = int(input("Masukan nilai x:"))
-k = int(input("Masukan nilai k:"))
-teks = input("Masukan nilai teks:")
-publick,privat = bangkitKunci(p,g,x)
-print(publick)
-print(privat)
-chiper = enkripsi(teks,k,publick)
-print(chiper)
-plain = decripsi(chiper,privat)
-print(plain)
+# p = int(input("Masukan nilai p:"))
+# g = int(input("Masukan nilai g:"))
+# x = int(input("Masukan nilai x:"))
+# k = int(input("Masukan nilai k:"))
+# teks = input("Masukan nilai teks:")
+# publick,privat = bangkitKunci(p,g,x)
+# print(publick)
+# print(privat)
+# chiper = enkripsi(teks,k,publick)
+# print(chiper)
+# plain = decripsi(chiper,privat)
+# print(plain)
