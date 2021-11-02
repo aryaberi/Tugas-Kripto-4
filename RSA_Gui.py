@@ -1,126 +1,112 @@
 from tkinter import *
 from tkinter import filedialog
+
 import RSA
-
 def RSA_Windows():
-    main = Tk()
-    main.geometry('500x450+10+200')
-    label3 = Label(main)
-    
-    def pilihFile():
-        global f_content
-        main.filename = filedialog.askopenfilename(initialdir="/c",title="Pilih file")
-        with open(main.filename,'r') as f:
-            f_content = f.read()
-        fileLabel=Label(main,text=main.filename)
-        fileLabel.pack()
+   def generate_key():
+      hide_all_frame()
+      generate_key_frame.pack(fill=BOTH, expand=1)
+      label2 = Label(generate_key_frame, text = "Masukan nilai p").pack()
+      entry2 = Entry(generate_key_frame,width=30)
+      entry2.pack()
 
-    def generateKey(p,q,e):
-        publick, privat = RSA.bangkitKunci(int(p),int(q),int(e))
-        label3 = Label(main, text = "Key Public dan Privat nya")
-        label3.pack()
-        publick = Label(main, text = publick)
-        publick.pack()
-        privat =  Label(main, text = privat)
-        privat.pack()
+      label3 = Label(generate_key_frame, text = "Masukan nilai q").pack()
+      a = Entry(generate_key_frame)
+      a.pack()
+      label4 = Label(generate_key_frame, text = "Masukan nilai e").pack()
+      b = Entry(generate_key_frame)
+      b.pack()
+      button1 = Button(generate_key_frame, text="Generate Key", command=lambda : generateKey(entry2.get(),a.get(),b.get())).pack()
 
-    def Encrypht(Text,e,n):
-        publick = [int(e),int(n)]
-        c = RSA.encriptRSA(Text,publick)
-        Label2 = Label(main, text = "Ini Chiper text nya:")
-        Label2.pack()
-        chiper = Label(main, text= c)
-        chiper.pack()
+   def encrypht():
+      hide_all_frame()
+      Encrypht_frame.pack(fill=BOTH, expand=1)
+      label = Label(Encrypht_frame, text = "Masukan Text").pack()
+      entry = Entry(Encrypht_frame,width=30)
+      entry.pack()
+      openFile = Button(Encrypht_frame, text="Pilih File", command=pilihFile).pack()
+      label5 = Label(Encrypht_frame, text = "Masukan kunci publick").pack
+      label6 = Label(Encrypht_frame, text = "Masukan nilai e").pack()
+      e1 = Entry(Encrypht_frame)
+      e1.pack()
+      label7 = Label(Encrypht_frame, text = "Masukan nilai n").pack()
+      n1 = Entry(Encrypht_frame)
+      n1.pack()
+      button2 = Button(Encrypht_frame, text="Enckrip", command=lambda : Encrypht(entry.get(),e1.get(),n1.get())).pack()
 
-    def Decrypht(Text,d,n):
-        privat = [int(d),int(n)]
-        p = RSA.dekirpRSA(Text,privat)
-        Label1 = Label(main, text = "Ini Plain text nya:")
-        Label1.pack()
-        plain = Label(main, text= p)
-        plain.pack()
-
-
-    Judul = Label(main,text="Algoritma RSA")
-    label = Label(main, text = "Masukan Text")
-    entry = Entry(main,width=30)
-
-    openFile = Button(main, text="Pilih File", command=pilihFile)
-
-
-    label2 = Label(main, text = "Masukan nilai p")
-    entry2 = Entry(main,width=30)
-
-    label3 = Label(main, text = "Masukan nilai q")
-    a = Entry(main)
-    label4 = Label(main, text = "Masukan nilai e")
-    b = Entry(main)
-
-    label5 = Label(main, text = "Masukan kunci publick")
-    label6 = Label(main, text = "Masukan nilai e")
-    e1 = Entry(main)
-    label7 = Label(main, text = "Masukan nilai n")
-    n1 = Entry(main)
-
-    label8 = Label(main, text = "Masukan kunci privat")
-    label9 = Label(main, text = "Masukan nilai d")
-    e2 = Entry(main)
-    label10 = Label(main, text = "Masukan nilai n")
-    n2 = Entry(main)
+   def decrypht():
+      hide_all_frame()
+      Decrypht_key_frame.pack(fill=BOTH, expand=1)
+      label = Label(Decrypht_key_frame, text = "Masukan Text").pack()
+      entry = Entry(Decrypht_key_frame,width=30)
+      entry.pack()
+      label8 = Label(Decrypht_key_frame, text = "Masukan kunci privat").pack()
+      label9 = Label(Decrypht_key_frame, text = "Masukan nilai d").pack()
+      e2 = Entry(Decrypht_key_frame)
+      e2.pack()
+      label10 = Label(Decrypht_key_frame, text = "Masukan nilai n").pack()
+      n2 = Entry(Decrypht_key_frame)
+      n2.pack()
+      button3 = Button(Decrypht_key_frame, text="Decrip", command=lambda : Decrypht(entry.get(),e2.get(),n2.get())).pack()
 
 
-    button1 = Button(main, text="Generate Key", command=lambda : generateKey(entry2.get(),a.get(),b.get()))
-    button2 = Button(main, text="Enckrip", command=lambda : Encrypht(entry.get(),e1.get(),n1.get()))
-    button3 = Button(main, text="Decrip", command=lambda : Decrypht(entry.get(),e2.get(),n2.get()))
+   def hide_all_frame():
+      for widget in generate_key_frame.winfo_children():
+         widget.destroy()
+      for widget in Encrypht_frame.winfo_children():
+         widget.destroy()
+      for widget in Decrypht_key_frame.winfo_children():
+         widget.destroy()
+      
+      generate_key_frame.pack_forget()
+      Encrypht_frame.pack_forget()
+      Decrypht_key_frame.pack_forget()   
+      
+   def pilihFile():
+      global f_content
+      root.filename = filedialog.askopenfilename(initialdir="/c",title="Pilih file")
+      with open(root.filename,'r') as f:
+         f_content = f.read()
+      fileLabel=Label(root,text=root.filename)
+      fileLabel.pack()
 
-    Judul.pack
-    Judul.place(x=10,y=10)
-    label.pack()
-    label.place(x=10,y=40)
-    entry.pack(ipady=5)
-    entry.place(x=10,y=60)
-    openFile.pack()
-    openFile.place(x=10,y=80)
-    label2.pack()
-    label2.place(x=10,y=100)
-    entry2.pack(ipady=5)
-    entry2.place(x=10,y=120)
-    label3.pack()
-    label3.place(x=10,y=140)
-    a.pack()
-    a.place(x=10,y=160)
-    label4.pack()
-    label4.place(x=10,y=180)
-    b.pack()
-    b.place(x=10,y=200)
-    button1.pack()
-    button1.place(x=10,y=220)
+   def generateKey(p,q,e):
+      publick, privat = RSA.bangkitKunci(int(p),int(q),int(e))
+      label3 = Label(generate_key_frame, text = "Key Public dan Privat nya")
+      label3.pack()
+      publick = Label(generate_key_frame, text = publick)
+      publick.pack()
+      privat =  Label(generate_key_frame, text = privat)
+      privat.pack()
 
-    label5.pack()
-    label5.place(x=10,y=260)
-    label6.pack()
-    label6.place(x=10,y=280)
-    e1.pack()
-    e1.place(x=10,y=300)
-    label7.pack()
-    label7.place(x=10,y=320)
-    n1.pack()
-    n1.place(x=10,y=340)
-    button2.pack()
-    button2.place(x=10,y=360)
+   def Encrypht(Text,e,n):
+      publick = [int(e),int(n)]
+      c = RSA.encriptRSA(Text,publick)
+      Label2 = Label(Encrypht_frame, text = "Ini Chiper text nya:")
+      Label2.pack()
+      chiper = Label(Encrypht_frame, text= c)
+      chiper.pack()
 
-    label8.pack()
-    label8.place(x=10,y=400)
-    label9.pack()
-    label9.place(x=10,y=420)
-    e2.pack()
-    e2.place(x=10,y=440)
-    label10.pack()
-    label10.place(x=10,y=460)
-    n2.pack()
-    n2.place(x=10,y=480)
-    button3.pack()
-    button3.place(x=10,y=500)
+   def Decrypht(Text,d,n):
+      privat = [int(d),int(n)]
+      p = RSA.dekirpRSA(Text,privat)
+      Label1 = Label(Decrypht_key_frame, text = "Ini Plain text nya:")
+      Label1.pack()
+      plain = Label(Decrypht_key_frame, text= p)
+      plain.pack()
 
 
-    main.mainloop()
+   root = Tk()
+   menubar = Menu(root)
+   filemenu = Menu(menubar, tearoff=0)
+   filemenu.add_command(label="Generate Key", command=generate_key)
+   filemenu.add_command(label="Encrypht", command=encrypht)
+   filemenu.add_command(label="Decrypht", command=decrypht)
+   menubar.add_cascade(label="RSA", menu=filemenu)
+
+   generate_key_frame = Frame(root,width=400,height=400)
+   Encrypht_frame = Frame(root,width=400,height=400)
+   Decrypht_key_frame = Frame(root,width=400,height=400)
+
+   root.config(menu=menubar)
+   root.mainloop()

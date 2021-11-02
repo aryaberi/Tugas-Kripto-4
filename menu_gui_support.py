@@ -19,9 +19,9 @@ except ImportError:
     import tkinter.ttk as ttk
     py3 = True
 
-import start
 import RSA_Gui
 import Elgamal_Gui
+
 
 def init(top, gui, *args, **kwargs):
     global w, top_level, root
