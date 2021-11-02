@@ -85,10 +85,24 @@ def Elgamal_windows():
 
    def Encrypht(teks,k,y,g,p):
         publick = [int(y),int(g),int(p)]
-        c = Elgamal.enkripsi(teks,int(k),publick)
+        count = 0
+        C = ""
+        N = len(p)/2
+        print(N)
+        temp = []
+        for i in range(len(teks)):
+           count += 1
+           if(i == len(teks)-1 or count == N):
+              C+= teks[i]
+              c = Elgamal.enkripsi(C,int(k),publick)
+              temp.append(c)
+              count =0
+              C = ""
+           elif(count < N):
+              C+= teks[i]
         Label2 = Label(Encrypht_frame, text = "Ini Chiper text nya:")
         Label2.pack()
-        chiper = Label(Encrypht_frame, text= c)
+        chiper = Label(Encrypht_frame, text= temp)
         chiper.pack()
    def Decrypht(Text,x,p):
       privat = [int(x),int(p)]
@@ -96,27 +110,40 @@ def Elgamal_windows():
       C = ""
       N = len(Text)-1
       temp=[]
+      temp2 = []
+      temp3 = []
       for i in range(len(Text)):
          count += 1
-         if(i == N):
+         if(i == N or count == len(p) and Text[i] != "*"):
             C += Text[i]
             temp.append(int(C))
+            C =""
+            count = 0
+         elif(Text[i] == "*"):
             C =""
             count = 0
          elif(count < len(p)):
             C += Text[i]
-         elif(count == len(p)):
-            C += Text[i]
-            temp.append(int(C))
-            C =""
-            count = 0
-         
 
       print(temp)
-      p = Elgamal.decripsi(temp,privat)
+      Z = len(temp)-1
+      for x in temp:
+         count += 1
+         if(i == Z or count == 2 ):
+            temp3.append(x)
+            print("ini temp3 nya",temp3)
+            p = Elgamal.decripsi(temp3,privat)
+            temp2.append(p)
+            temp3.clear()
+            count = 0
+         elif(count < 2):
+            temp3.append(x)
+            print("temp3",temp3)
+
+      
       Label1 = Label(Decrypht_key_frame, text = "Ini Plain text nya:")
       Label1.pack()
-      plain = Label(Decrypht_key_frame, text= p)
+      plain = Label(Decrypht_key_frame, text= temp2)
       plain.pack()
 
 
