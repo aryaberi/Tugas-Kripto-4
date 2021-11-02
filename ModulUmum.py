@@ -260,3 +260,9 @@ def dconvert(X):
         return "Y"
     elif(X == "35"):
         return "Z"
+
+def copy_array(Arr):
+    arr2 = []
+    for x in Arr:
+        arr2.append(x)
+    return arr2
