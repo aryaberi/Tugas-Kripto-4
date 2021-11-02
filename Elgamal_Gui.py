@@ -90,28 +90,34 @@ def Elgamal_windows():
         Label2.pack()
         chiper = Label(Encrypht_frame, text= c)
         chiper.pack()
-
    def Decrypht(Text,x,p):
-        privat = [int(x),int(p)]
-        temp = []
-        count = 0
-        c = ''
-        print(len(p))
-        for x in Text:
-           count += 1
-           if(count < len(p)):
-             c += x        
-           elif(count == len(p)):
-             c += x
-             temp.append(int(c))
-             count = 0
-             c = ''
+      privat = [int(x),int(p)]
+      count = 0
+      C = ""
+      N = len(Text)-1
+      temp=[]
+      for i in range(len(Text)):
+         count += 1
+         if(i == N):
+            C += Text[i]
+            temp.append(int(C))
+            C =""
+            count = 0
+         elif(count < len(p)):
+            C += Text[i]
+         elif(count == len(p)):
+            C += Text[i]
+            temp.append(int(C))
+            C =""
+            count = 0
+         
 
-        p = Elgamal.decripsi(temp,privat)
-        Label1 = Label(Decrypht_key_frame, text = "Ini Plain text nya:")
-        Label1.pack()
-        plain = Label(Decrypht_key_frame, text= p)
-        plain.pack()
+      print(temp)
+      p = Elgamal.decripsi(temp,privat)
+      Label1 = Label(Decrypht_key_frame, text = "Ini Plain text nya:")
+      Label1.pack()
+      plain = Label(Decrypht_key_frame, text= p)
+      plain.pack()
 
 
 
