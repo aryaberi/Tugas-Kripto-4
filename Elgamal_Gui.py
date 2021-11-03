@@ -120,6 +120,7 @@ def Elgamal_windows():
             C =""
             count = 0
          elif(Text[i] == "*"):
+            temp.append(int(C))
             C =""
             count = 0
          elif(count < len(p)):
@@ -163,3 +164,5 @@ def Elgamal_windows():
 
    root.config(menu=menubar)
    root.mainloop()
+
+ 
