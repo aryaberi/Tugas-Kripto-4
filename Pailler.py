@@ -39,7 +39,7 @@ def decrypt(chiper, privat,publick):
 # publick,privat = bangkitKunci(p,q,g)
 # print(publick)
 # print(privat)
-# chiper = encrypt(51,publick,23)
+# chiper = encrypt(42,publick,23)
 # print(chiper)
 # plain = decrypt(chiper,privat,publick)
 # print(plain)

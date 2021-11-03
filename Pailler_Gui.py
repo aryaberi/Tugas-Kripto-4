@@ -24,7 +24,7 @@ def Pailler_Windows():
 		fileLabel.pack()
 
 	def generateKeyCommand(p, q, g):
-		publicKey, privateKey = Pailler.bangkitKunci(int(p), int(q), int(e))
+		publicKey, privateKey = Pailler.bangkitKunci(int(p), int(q), int(g))
 		labelGenerate = Label(generateKeyFrame, text = "Key Public dan Private:")
 		labelGenerate.pack()
 		publicKey = Label(generateKeyFrame, text = publicKey)
@@ -57,7 +57,7 @@ def Pailler_Windows():
 
 	def encryptionCommand(text, n, g, r):
 		publicKey = [int(n), int(g)]
-		cipher = Pailler.encrypt(text, publicKey, r)
+		cipher = Pailler.encrypt(int(text), publicKey, int(r))
 		labelCipher = Label(encryptionFrame, text = "Ciphertext: ")
 		labelCipher.pack()
 		ciphertext = Label(encryptionFrame, text = cipher)
@@ -93,7 +93,8 @@ def Pailler_Windows():
 
 	def decryptionCommand(text, lamda, miu, n):
 		privateKey = [int(lamda), int(miu)]
-		plain = Pailler.decrypt(text, privateKey, n)
+		publick = [int(n)]
+		plain = Pailler.decrypt(int(text), privateKey,publick)
 		labelDecipher = Label(decryptionFrame, text = "Plaintext: ")
 		labelDecipher.pack()
 		plaintext = Label(decryptionFrame, text = plain)
@@ -125,7 +126,7 @@ def Pailler_Windows():
 		entry5.pack()
 
 		# Button 3 untuk dekripsi
-		button3 = Button(decryptionFrame, text = "Decrypt", command = lambda : decryptionCommand(entry1.get(), entry8.get(), entry9.get(), entry5.get())).pack()
+		button3 = Button(decryptionFrame, text = "Decrypt", command = lambda : decryptionCommand(entry1.get(), entry8.get(), entry6.get(), entry5.get())).pack()
 
 	root = Tk()
 	menubar = Menu(root)
