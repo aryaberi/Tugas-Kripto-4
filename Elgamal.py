@@ -12,7 +12,7 @@ def bangkitKunci(p,g,x):
 def enkripsi(teks,k,publick):
     m = ''
     for x in teks:
-        m += ModulUmum.convert_alfabet(x)
+        m += ModulUmum.convert(x)
     print(m) 
     a = pow(publick[1],k)%publick[2]
     b = pow(publick[0],k)*int(m)%publick[2]
@@ -26,8 +26,8 @@ def decripsi(chiper,privat):
     Counter = 0
     print(chiper)
     print(privat)
-    a = pow(chiper[0],privat[1]-1-privat[0])%privat[1]
-    m = (chiper[1]*a)%privat[1]
+    a = pow(int(chiper[0]),privat[1]-1-privat[0])%privat[1]
+    m = (int(chiper[1])*a)%privat[1]
     m = str(m)
     if len(m) %2 !=0:
         temp.append('0')
@@ -42,7 +42,7 @@ def decripsi(chiper,privat):
              char += temp[i]
              Counter = 0
              print(char)
-             plain += ModulUmum.convert_Back(char)
+             plain += ModulUmum.dconvert(char)
              char = ''
         
     return plain

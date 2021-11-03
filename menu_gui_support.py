@@ -21,7 +21,6 @@ except ImportError:
 
 import RSA_Gui
 import Elgamal_Gui
-import Pailler_Gui
 
 
 def init(top, gui, *args, **kwargs):
@@ -43,8 +42,4 @@ def openRSAWindow():
 def openElgamalWindow():
     destroy_window()
     Elgamal_Gui.Elgamal_windows()
-
-def openPaillerWindow():
-    destroy_window()
-    Pailler_Gui.Pailler_Windows()
 
