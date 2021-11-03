@@ -6,14 +6,14 @@ import Pailler
 def Pailler_Windows():
 	def hideAllFrame():
 		for widget in generateKeyFrame.winfo_children():
-    		widget.destroy()
-    	for widget in encryptionFrame.winfo_children():
-        	widget.destroy()
-    	for widget in decryptionFrame.winfo_children():
-        	widget.destroy()
-        generateKeyFrame.pack_forget()
-    	encryptionFrame.pack_forget()
-    	decryptionFrame.pack_forget()
+			widget.destroy()
+		for widget in encryptionFrame.winfo_children():
+			widget.destroy()
+		for widget in decryptionFrame.winfo_children():
+			widget.destroy()
+		generateKeyFrame.pack_forget()
+		encryptionFrame.pack_forget()
+		decryptionFrame.pack_forget()
 
 	def pilihFile():
 		global f_content
@@ -31,27 +31,28 @@ def Pailler_Windows():
 		publicKey.pack()
 		privateKey = Label(generateKeyFrame, text = privateKey)
 		privateKey.pack()
-
-    def generateKey():
-    	hideAllFrame()
-    	generateKeyFrame.pack(fill = BOTH, expand = 1)
+	
+	def generateKey():
+		hideAllFrame()
+		generateKeyFrame.pack(fill = BOTH, expand = 1)
 
     	# Label 2 = p
-    	label2 = Label(generateKeyFrame, text = "Masukkan nilai p").pack()
-    	entry2 = Entry(generateKeyFrame, width = 25)
-    	entry2.pack()
+		label2 = Label(generateKeyFrame, text = "Masukkan nilai p").pack()
+		entry2 = Entry(generateKeyFrame, width = 25)
+		entry2.pack()
 
     	# Label 3 = q
-    	label3 = Label(generateKeyFrame, text = "Masukkan nilai q").pack()
-    	entry3 = Entry(generateKeyFrame, width = 25)
-    	entry3.pack()
+		label3 = Label(generateKeyFrame, text = "Masukkan nilai q").pack()
+		entry3 = Entry(generateKeyFrame, width = 25)
+		entry3.pack()
 
 		# Label 4 = g
-    	label4 = Label(generateKeyFrame, text = "Masukkan nilai g").pack()
-    	entry4 = Entry(generateKeyFrame, width = 25)
-    	entry4.pack()
+		label4 = Label(generateKeyFrame, text = "Masukkan nilai g").pack()
+		entry4 = Entry(generateKeyFrame, width = 25)
+		entry4.pack()
 
     	# Button 1 untuk generate key
+		
 		button1 = Button(generateKeyFrame, text = "Generate Key", command = lambda : generateKeyCommand(entry2.get(), entry3.get(), entry4.get())).pack()
 
 	def encryptionCommand(text, n, g, r):
