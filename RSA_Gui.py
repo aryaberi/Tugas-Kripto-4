@@ -2,7 +2,21 @@ from tkinter import *
 from tkinter import filedialog
 
 import RSA
+import easygui
+import sys
+
 def RSA_Windows():
+   def saveToFile_key(Key):
+    pathFile = easygui.filesavebox(title='Output File (TEXT)')
+    print(Key)
+    if (pathFile != None):
+       f = open(pathFile,"wt")
+       for i in range(len(Key)):
+         f.write(str(Key[i]))
+         f.write(str(","))
+       f.close()
+   
+   
    def generate_key():
       hide_all_frame()
       generate_key_frame.pack(fill=BOTH, expand=1)
@@ -17,22 +31,22 @@ def RSA_Windows():
       b = Entry(generate_key_frame)
       b.pack()
       button1 = Button(generate_key_frame, text="Generate Key", command=lambda : generateKey(entry2.get(),a.get(),b.get())).pack()
-
+      
    def encrypht():
       hide_all_frame()
       Encrypht_frame.pack(fill=BOTH, expand=1)
       label = Label(Encrypht_frame, text = "Masukan Text").pack()
       entry = Entry(Encrypht_frame,width=30)
       entry.pack()
-      openFile = Button(Encrypht_frame, text="Pilih File", command=pilihFile).pack()
       label5 = Label(Encrypht_frame, text = "Masukan kunci publick").pack
       label6 = Label(Encrypht_frame, text = "Masukan nilai e").pack()
       e1 = Entry(Encrypht_frame)
       e1.pack()
       label7 = Label(Encrypht_frame, text = "Masukan nilai n").pack()
       n1 = Entry(Encrypht_frame)
-      n1.pack()
-      button2 = Button(Encrypht_frame, text="Enckrip", command=lambda : Encrypht(entry.get(),e1.get(),n1.get())).pack()
+      n1.pack()    
+      button1 = Button(Encrypht_frame, text="Enckrip", command=lambda : Encrypht(entry.get(),e1.get(),n1.get())).pack()
+      
 
    def decrypht():
       hide_all_frame()
@@ -63,21 +77,25 @@ def RSA_Windows():
       Decrypht_key_frame.pack_forget()   
       
    def pilihFile():
-      global f_content
+      global f_content,f_content_s
       root.filename = filedialog.askopenfilename(initialdir="/c",title="Pilih file")
       with open(root.filename,'r') as f:
          f_content = f.read()
       fileLabel=Label(root,text=root.filename)
       fileLabel.pack()
+      f_content_s = True
+      
 
    def generateKey(p,q,e):
       publick, privat = RSA.bangkitKunci(int(p),int(q),int(e))
       label3 = Label(generate_key_frame, text = "Key Public dan Privat nya")
       label3.pack()
-      publick = Label(generate_key_frame, text = publick)
-      publick.pack()
-      privat =  Label(generate_key_frame, text = privat)
-      privat.pack()
+      Lpublick = Label(generate_key_frame, text = publick)
+      Lpublick.pack()
+      Lprivat =  Label(generate_key_frame, text = privat)
+      Lprivat.pack()
+      button2 = Button(generate_key_frame, text="Save Key Publick", command=lambda : saveToFile_key(publick)).pack()
+      button3 = Button(generate_key_frame, text="Save Key Privat", command=lambda : saveToFile_key(privat)).pack()
 
    def Encrypht(Text,e,n):
       publick = [int(e),int(n)]
